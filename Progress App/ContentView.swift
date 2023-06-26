@@ -8,9 +8,19 @@
 import SwiftUI
 import UserNotifications
 
+struct UserProfile {
+    var name: String
+    var goals: [String]
+    var progressHistory: [Double]
+    // Additional properties and methods related to user profile management
+}
+
+
+
 struct ContentView: View {
     @State private var progress: Double = 0.0
     @State private var timeLeft: TimeInterval = 0.0
+    @State private var userProfile = UserProfile(name: "John Doe", goals: [], progressHistory: [])
     
     let milestoneValues: [Double] = [0.5, 0.8, 1.0] // Milestone completion values
     
@@ -53,6 +63,7 @@ struct ContentView: View {
             
             Button(action: {
                 updateProgress()
+                userProfile.progressHistory.append(progress)
             }) {
                 Text("Update Progress")
                     .font(.headline)
